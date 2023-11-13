@@ -15,8 +15,8 @@ class PasswordDAO {
         val dateHour = Calendar.getInstance().timeInMillis
         val cv = ContentValues()
 
-        cv.put("description", passwd.description)
-        cv.put("generated_password", passwd.generatedPassword)
+        cv.put("description", passwd.getDescription())
+        cv.put("generated_password", passwd.getGeneratedPassword())
         cv.put("created_date", dateHour)
         cv.put("updated_date", dateHour)
         this.db.writableDatabase.insert("passwd", null, cv)
@@ -68,10 +68,10 @@ class PasswordDAO {
 
     fun update(passwd: Password){
         val where = "id = ?"
-        val pWhere = arrayOf(passwd.id.toString())
+        val pWhere = arrayOf(passwd.getId().toString())
         val cv = ContentValues()
-        cv.put("description", passwd.description)
-        cv.put("generatedPassword", passwd.generatedPassword)
+        cv.put("description", passwd.getDescription())
+        cv.put("generatedPassword", passwd.getGeneratedPassword())
         cv.put("updated_date", Calendar.getInstance().timeInMillis)
         this.db.writableDatabase.update("passwd", cv, where, pWhere)
     }
